@@ -11,6 +11,8 @@ import java.util.List;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -421,6 +423,16 @@ public class KulakanForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Form Barang Wajib Diisi");
             return false;
         }
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date tglExp = exp.getDate();
+        Calendar currentDate = Calendar.getInstance();
+        Date tglNow = currentDate.getTime();
+        if(tglExp.before(tglNow)){
+            JOptionPane.showMessageDialog(this, "Tanggal Kadaluarsa Tidak Boleh Kurang Dari Tanggal Saat Ini");
+            return false;
+        }
+        
         return true;
     }
     boolean CheckBar(){

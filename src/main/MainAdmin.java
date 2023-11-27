@@ -23,6 +23,7 @@ public class MainAdmin extends javax.swing.JFrame {
         this.dispose();
         this.setLocationRelativeTo(null);
         this.setUndecorated(true);
+        loadDashBoard();
     }
 
     /**
@@ -387,7 +388,21 @@ public class MainAdmin extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_jPanelExitMouseClicked
-
+    void loadDashBoard(){
+        DashChange();
+        
+        PegDefault();
+        BarDefault();
+        KulDefault();
+        RiwKulDefault();
+        RiwTraDefault();
+        
+        MainPanel.removeAll();
+        DashboardForm form = new DashboardForm();
+        MainPanel.add(form);
+        MainPanel.revalidate();
+        MainPanel.repaint();
+    }
     private void jPanelPegMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelPegMouseClicked
         PegChange();
         
