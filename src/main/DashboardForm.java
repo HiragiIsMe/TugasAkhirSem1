@@ -20,26 +20,24 @@ public class DashboardForm extends javax.swing.JPanel {
         DefaultTableCellRenderer headRender = new DefaultTableCellRenderer();
         headRender.setForeground(new Color(255,246,244));
         headRender.setBackground(new Color(248,111,3));
-        MainTable.getTableHeader().setDefaultRenderer(headRender);
+        MainTableExp.getTableHeader().setDefaultRenderer(headRender);
+        MainTableHab.getTableHeader().setDefaultRenderer(headRender);
         loadPeg();
-        loadBar();
         loadTran();
         loadKul();
         loadExp();
+        loadHab();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        hapus = new javax.swing.JPanel();
-        bar = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         hapus1 = new javax.swing.JPanel();
         peg = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        MainTable = new javax.swing.JTable();
+        MainTableExp = new javax.swing.JTable();
         hapus2 = new javax.swing.JPanel();
         keluar = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -48,39 +46,11 @@ public class DashboardForm extends javax.swing.JPanel {
         masuk = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        MainTableHab = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 246, 244));
-
-        hapus.setBackground(new java.awt.Color(248, 111, 3));
-
-        bar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        bar.setForeground(new java.awt.Color(255, 246, 244));
-        bar.setText("10");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Jumlah Barang");
-
-        javax.swing.GroupLayout hapusLayout = new javax.swing.GroupLayout(hapus);
-        hapus.setLayout(hapusLayout);
-        hapusLayout.setHorizontalGroup(
-            hapusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hapusLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(hapusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bar)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        hapusLayout.setVerticalGroup(
-            hapusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hapusLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bar)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
 
         hapus1.setBackground(new java.awt.Color(248, 111, 3));
 
@@ -101,7 +71,7 @@ public class DashboardForm extends javax.swing.JPanel {
                 .addGroup(hapus1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(peg)
                     .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         hapus1Layout.setVerticalGroup(
             hapus1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,14 +80,14 @@ public class DashboardForm extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(peg)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(248, 111, 3));
-        jLabel3.setText("List Barang Hampir Kadaluarsa");
+        jLabel3.setText("List Barang Hampir Habis");
 
-        MainTable.setModel(new javax.swing.table.DefaultTableModel(
+        MainTableExp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -128,7 +98,7 @@ public class DashboardForm extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(MainTable);
+        jScrollPane1.setViewportView(MainTableExp);
 
         hapus2.setBackground(new java.awt.Color(248, 111, 3));
 
@@ -199,7 +169,7 @@ public class DashboardForm extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(masuk)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         hapus3Layout.setVerticalGroup(
             hapus3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,47 +180,63 @@ public class DashboardForm extends javax.swing.JPanel {
                 .addGroup(hapus3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(masuk))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(248, 111, 3));
+        jLabel8.setText("List Barang Hampir Kadaluarsa");
+
+        MainTableHab.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(MainTableHab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hapus3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(hapus1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(hapus2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(105, 105, 105))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 51, Short.MAX_VALUE))))
+                    .addComponent(jLabel8)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(hapus2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(70, 70, 70)
+                            .addComponent(hapus3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(hapus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane2)))
+                .addGap(0, 109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hapus1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hapus2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hapus3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(hapus2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hapus3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addComponent(hapus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     private void loadPeg(){
@@ -259,16 +245,6 @@ public class DashboardForm extends javax.swing.JPanel {
             ResultSet rs = dbConnection.getData(query);
             rs.next();
             peg.setText(String.valueOf(rs.getInt("jumlah")));
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(this, e.toString());
-        }
-    }
-    private void loadBar(){
-        String query = "select count(*) as jumlah from barang";
-        try{
-            ResultSet rs = dbConnection.getData(query);
-            rs.next();
-            bar.setText(String.valueOf(rs.getInt("jumlah")));
         }catch(SQLException e){
             JOptionPane.showMessageDialog(this, e.toString());
         }
@@ -304,27 +280,44 @@ public class DashboardForm extends javax.swing.JPanel {
             while(rs.next()){
                 tbl.addRow(new Object[]{rs.getString("nama"), rs.getDate("tgl_exp")});
             }
-            MainTable.setModel(tbl);
+            MainTableExp.setModel(tbl);
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+    
+    private void loadHab(){
+        DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Nama Barang");
+        tbl.addColumn("Sisa Stok");
+        
+        String query = "SELECT nama, stok from barang where stok < 20 ";
+        try{
+            ResultSet rs = dbConnection.getData(query);
+            while(rs.next()){
+                tbl.addRow(new Object[]{rs.getString("nama"), String.valueOf(rs.getInt("stok"))});
+            }
+            MainTableHab.setModel(tbl);
         }catch(SQLException e){
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable MainTable;
-    private javax.swing.JLabel bar;
-    private javax.swing.JPanel hapus;
+    private javax.swing.JTable MainTableExp;
+    private javax.swing.JTable MainTableHab;
     private javax.swing.JPanel hapus1;
     private javax.swing.JPanel hapus2;
     private javax.swing.JPanel hapus3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel keluar;
     private javax.swing.JLabel masuk;
     private javax.swing.JLabel peg;

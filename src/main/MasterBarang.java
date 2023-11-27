@@ -287,7 +287,7 @@ public class MasterBarang extends javax.swing.JPanel {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        jPanelLog3.setBackground(new java.awt.Color(248, 111, 3));
+        jPanelLog3.setBackground(new java.awt.Color(82, 95, 225));
         jPanelLog3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanelLog3MouseClicked(evt);
@@ -319,7 +319,7 @@ public class MasterBarang extends javax.swing.JPanel {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        jPanelLog4.setBackground(new java.awt.Color(248, 111, 3));
+        jPanelLog4.setBackground(new java.awt.Color(255, 0, 51));
         jPanelLog4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanelLog4MouseClicked(evt);

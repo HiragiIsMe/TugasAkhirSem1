@@ -269,7 +269,7 @@ public class MasterPegawai extends javax.swing.JPanel {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        up.setBackground(new java.awt.Color(248, 111, 3));
+        up.setBackground(new java.awt.Color(82, 95, 225));
         up.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 upMouseClicked(evt);
@@ -301,7 +301,7 @@ public class MasterPegawai extends javax.swing.JPanel {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        del.setBackground(new java.awt.Color(248, 111, 3));
+        del.setBackground(new java.awt.Color(255, 0, 51));
         del.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 delMouseClicked(evt);

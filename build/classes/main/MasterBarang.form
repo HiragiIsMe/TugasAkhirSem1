@@ -475,7 +475,7 @@
     <Container class="javax.swing.JPanel" name="jPanelLog3">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="3" green="6f" red="f8" type="rgb"/>
+          <Color blue="e1" green="5f" red="52" type="rgb"/>
         </Property>
       </Properties>
       <Events>
@@ -525,7 +525,7 @@
     <Container class="javax.swing.JPanel" name="jPanelLog4">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="3" green="6f" red="f8" type="rgb"/>
+          <Color blue="33" green="0" red="ff" type="rgb"/>
         </Property>
       </Properties>
       <Events>

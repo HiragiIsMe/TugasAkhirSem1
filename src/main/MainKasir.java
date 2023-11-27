@@ -129,7 +129,7 @@ public class MainKasir extends javax.swing.JFrame {
                     .addGap(0, 4, Short.MAX_VALUE)))
         );
 
-        jPanelLog4.setBackground(new java.awt.Color(248, 111, 3));
+        jPanelLog4.setBackground(new java.awt.Color(255, 0, 51));
         jPanelLog4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanelLog4MouseClicked(evt);
@@ -498,7 +498,7 @@ public class MainKasir extends javax.swing.JFrame {
     }
     private void jPanelLog3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLog3MouseClicked
         if(valBar() && getBarang()){
-            if(stok_barang > Integer.parseInt(qty.getText())){
+            if(stok_barang >= Integer.parseInt(qty.getText())){
                 if(CheckBar()){
                     idBrgTbl.add(idBrg.get(barang.getSelectedIndex()));
                     String nama = barang.getSelectedItem().toString();
@@ -548,12 +548,12 @@ public class MainKasir extends javax.swing.JFrame {
                     stInDetTran.executeUpdate(InDetTran);
                     stInDetTran.close();
                     
-                    String upStok = "update barang set stok = stok - "+ tbl.getValueAt(i, 2) +" where id = "+ idBrgTbl.get(i) +"";
-                    Statement stUp = dbConnection.getConn().createStatement();
-                    stUp.executeUpdate(upStok);
-                    stUp.close();
+//                    String upStok = "update barang set stok = stok - "+ tbl.getValueAt(i, 2) +" where id = "+ idBrgTbl.get(i) +"";
+//                    Statement stUp = dbConnection.getConn().createStatement();
+//                    stUp.executeUpdate(upStok);
+//                    stUp.close();
                     
-                    JOptionPane.showMessageDialog(this, "Kulakan Berhasil Didata");
+                    JOptionPane.showMessageDialog(this, "Transaksi Berhasil");
                     tbl.setRowCount(0);
                     idBrgTbl.clear();
                     totalHar.setText("");
@@ -583,7 +583,7 @@ public class MainKasir extends javax.swing.JFrame {
     private void qtyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qtyKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
             if(valBar() && getBarang()){
-                if(stok_barang > Integer.parseInt(qty.getText())){
+                if(stok_barang >= Integer.parseInt(qty.getText())){
                     if(CheckBar()){
                         idBrgTbl.add(idBrg.get(barang.getSelectedIndex()));
                         String nama = barang.getSelectedItem().toString();
@@ -597,6 +597,7 @@ public class MainKasir extends javax.swing.JFrame {
                     }
                 }else{
                     JOptionPane.showMessageDialog(this, "Stok Tidak Memenuhi, Sisa Stok adalah " + stok_barang);
+                    qty.setText("");
                 }
             }
         }

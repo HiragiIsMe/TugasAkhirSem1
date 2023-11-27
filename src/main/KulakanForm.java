@@ -311,7 +311,7 @@ public class KulakanForm extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(MainTable);
 
-        hapus.setBackground(new java.awt.Color(248, 111, 3));
+        hapus.setBackground(new java.awt.Color(255, 0, 51));
         hapus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 hapusMouseClicked(evt);
@@ -489,10 +489,10 @@ public class KulakanForm extends javax.swing.JPanel {
                     stDetIn.executeUpdate(detKulIn);
                     stDetIn.close();
                     
-                    String upStok = "update barang set stok = "+ tbl.getValueAt(i, 1) +" where id = "+ id.get(i) +"";
-                    Statement stUp = dbConnection.getConn().createStatement();
-                    stUp.executeUpdate(upStok);
-                    stUp.close();
+//                    String upStok = "update barang set stok = stok + "+ tbl.getValueAt(i, 2) +" where id = "+ id.get(i) +"";
+//                    Statement stUp = dbConnection.getConn().createStatement();
+//                    stUp.executeUpdate(upStok);
+//                    stUp.close();
                 }
                 
                 JOptionPane.showMessageDialog(this, "Kulakan Berhasil Didata");
