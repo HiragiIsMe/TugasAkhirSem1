@@ -424,6 +424,11 @@ public class KulakanForm extends javax.swing.JPanel {
             return false;
         }
         
+        if(stok.getText().equals("0")){
+            JOptionPane.showMessageDialog(this, "Stok Tidak Boleh 0");
+            return false;
+        }
+        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date tglExp = exp.getDate();
         Calendar currentDate = Calendar.getInstance();

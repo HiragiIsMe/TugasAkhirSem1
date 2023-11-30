@@ -521,11 +521,19 @@ public class MasterPegawai extends javax.swing.JPanel {
                     r = 2;
                 }
                 
-                String query = "update users set nama = '"+ n +"', username = '"+ u +"', password = '"+ p +"', role = "+ r +" where id = "+ selID +"";
-                Statement st = dbConnection.getConn().createStatement();
-                st.executeUpdate(query);
-                st.close();
-                JOptionPane.showMessageDialog(this, "Data Berhasil DiUbah");
+                if(password.getText().equals("")){
+                    String query = "update users set nama = '"+ n +"', username = '"+ u +"', role = "+ r +" where id = "+ selID +"";
+                    Statement st = dbConnection.getConn().createStatement();
+                    st.executeUpdate(query);
+                    st.close();
+                    JOptionPane.showMessageDialog(this, "Data Berhasil DiUbah");
+                }else{
+                    String query = "update users set nama = '"+ n +"', username = '"+ u +"', password = '"+ p +"', role = "+ r +" where id = "+ selID +"";
+                    Statement st = dbConnection.getConn().createStatement();
+                    st.executeUpdate(query);
+                    st.close();
+                    JOptionPane.showMessageDialog(this, "Data Berhasil DiUbah");
+                }
                 
                 id.clear();
                 uname.clear();
