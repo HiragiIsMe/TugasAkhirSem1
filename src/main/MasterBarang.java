@@ -537,7 +537,7 @@ public class MasterBarang extends javax.swing.JPanel {
                 Statement st = dbConnection.getConn().createStatement();
                 st.executeUpdate(query);
                 st.close();
-                JOptionPane.showMessageDialog(this, "Data Berhasil Ditambah");
+                JOptionPane.showMessageDialog(this, "Data Berhasil Diubah");
                 
                 id.clear();
                 id_unit.clear();

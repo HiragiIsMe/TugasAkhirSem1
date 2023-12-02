@@ -201,7 +201,7 @@ public class RiwayatKulakanForm extends javax.swing.JPanel {
             id.clear();
             while(rs.next()){
                 id.add(rs.getInt("id"));
-                tblMain.addRow(new Object[]{String.valueOf(rs.getDate("tanggal")), String.valueOf(rs.getInt("total")), String.valueOf(rs.getInt("total")), rs.getString("catatan")});
+                tblMain.addRow(new Object[]{String.valueOf(rs.getDate("tanggal")), String.valueOf(rs.getInt("total")), rs.getString("catatan")});
             }
             MainTable.setModel(tblMain);
         }catch(Exception e){
