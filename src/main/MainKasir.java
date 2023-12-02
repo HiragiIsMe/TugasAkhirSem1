@@ -557,11 +557,22 @@ public class MainKasir extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_totalBayKeyTyped
-
-    private void jPanelLog5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLog5MouseClicked
+    boolean val(){
+        
+        if(MainTable.getRowCount() == 0){
+            JOptionPane.showMessageDialog(this, "Barang Di Table Tidak Boleh Kosong");
+            return false;
+        }
+        
         if(totalHar.getText().equals("") || totalKem.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Silahkan Selesaikan Proses Pembayaran Terlebih Dahulu");
-        }else{
+            return false;
+        }
+        return true;
+    }
+    private void jPanelLog5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLog5MouseClicked
+
+       if(val()){
             LocalDateTime currentDate = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDateTime = currentDate.format(formatter);
@@ -586,21 +597,18 @@ public class MainKasir extends javax.swing.JFrame {
 //                    Statement stUp = dbConnection.getConn().createStatement();
 //                    stUp.executeUpdate(upStok);
 //                    stUp.close();
-                    
-                    JOptionPane.showMessageDialog(this, "Transaksi Berhasil");
+                }
+                JOptionPane.showMessageDialog(this, "Transaksi Berhasil");
                     tbl.setRowCount(0);
                     idBrgTbl.clear();
                     totalHar.setText("");
                     totalItem.setText("");
                     totalBay.setText("");
                     totalKem.setText("");
-                }
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.toString());
             }
-            
-            
-        }
+       }
     }//GEN-LAST:event_jPanelLog5MouseClicked
 
     private void totalBayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalBayKeyPressed
