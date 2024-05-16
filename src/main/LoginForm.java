@@ -82,7 +82,7 @@ public class LoginForm extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 246, 244));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 111, 3)));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(248, 111, 3), 1, true));
 
         jPanelExit.setBackground(new java.awt.Color(255, 0, 51));
         jPanelExit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -231,7 +231,7 @@ public class LoginForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 

@@ -4,9 +4,15 @@
  */
 package main;
 
+import Utils.NomorTransaksi;
 import Utils.User;
 import Utils.dbConnection;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDateTime;
@@ -17,6 +23,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.Document;
+import java.io.IOException;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
@@ -39,6 +47,7 @@ public class MainKasir extends javax.swing.JFrame {
         MainTable.getTableHeader().setDefaultRenderer(headRender);
         loadTable();
         loadBarang();
+        noTran.setText(NomorTransaksi.generateUniqueTransactionNumber());
         AutoCompleteDecorator.decorate(barang);
     }
 
@@ -79,6 +88,8 @@ public class MainKasir extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         Logout = new javax.swing.JPanel();
         jLabelRiwTra2 = new javax.swing.JLabel();
+        noTran = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 246, 244));
@@ -385,7 +396,7 @@ public class MainKasir extends javax.swing.JFrame {
             .addGroup(LogoutLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabelRiwTra2)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LogoutLayout.setVerticalGroup(
             LogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,38 +406,63 @@ public class MainKasir extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
+        noTran.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        noTran.setForeground(new java.awt.Color(248, 111, 3));
+        noTran.setText("0");
+        noTran.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 111, 3)));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(248, 111, 3));
+        jLabel3.setText("Nomor Transaksi :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(37, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanelLog4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(233, 233, 233)
+                                .addComponent(jPanelLog4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(noTran)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanelExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanelExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jPanelLog4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noTran))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelLog4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -452,11 +488,11 @@ public class MainKasir extends javax.swing.JFrame {
     void loadBarang(){
         DefaultComboBoxModel mdl = new DefaultComboBoxModel();
         try{
-            String query = "select * from barang";
+            String query = "select * from barang where stok > 0";
             ResultSet rs = dbConnection.getData(query);
             while(rs.next()){
                 idBrg.add(rs.getInt("id"));
-                mdl.addElement(rs.getString("nama"));
+                mdl.addElement(rs.getString("nama") + " (" + rs.getString("kode") + ")");
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.toString());
@@ -508,14 +544,25 @@ public class MainKasir extends javax.swing.JFrame {
         return true;
     }
     boolean CheckBar(){
+        DefaultTableModel tbl = (DefaultTableModel)MainTable.getModel();
         for(int i = 0; i < idBrgTbl.size(); i++){
             if(idBrg.get(barang.getSelectedIndex()) == idBrgTbl.get(i)){
-                String subtotal = String.valueOf(harga_barang * Integer.parseInt(qty.getText()));
-                tbl.setValueAt(qty.getText(), i, 2);
-                tbl.setValueAt(subtotal, i, 3);
-                Calculate();
-                return false;
+                int qtyold = Integer.valueOf(tbl.getValueAt(i, 2).toString());
+                int qtynew = Integer.valueOf(qty.getText());
+                int neww = qtyold + qtynew;
+                if(stok_barang >= neww){
+                    String subtotal = String.valueOf(harga_barang * neww);
+                    tbl.setValueAt(String.valueOf(neww), i, 2);
+                    tbl.setValueAt(subtotal, i, 3);
+                    Calculate();
+                    qty.setText("");
+                    return false;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Stok Tidak Memenuhi, Sisa Stok adalah " + stok_barang);
+                }
             }
+            qty.setText("");
+            return false;
         }
         return true;
     }
@@ -570,13 +617,107 @@ public class MainKasir extends javax.swing.JFrame {
         }
         return true;
     }
+    void GenerateStruk(){
+        
+        float width = 3.25f;
+        float height = 6.5f;
+        Document document = new Document(new com.itextpdf.text.Rectangle(width * 72, height * 72));
+
+        try {
+            File tempFile = File.createTempFile("pdf", ".pdf");
+            FileOutputStream fos = new FileOutputStream(tempFile);
+
+            PdfWriter writer = PdfWriter.getInstance(document, fos);
+            document.open();
+            writer.setCompressionLevel(0);
+            
+            Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+            Font monospacedFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, BaseColor.BLACK);
+            
+            Paragraph title = new Paragraph("Kulaanku", boldFont);
+            title.setAlignment(Element.ALIGN_CENTER);// Menghilangkan spasi setelah judul
+            document.add(title);
+            
+            Paragraph alamat = new Paragraph("Jl.Dimana Mana Nomor Random \n Jember, Jawa Timur", monospacedFont);
+            alamat.setAlignment(Element.ALIGN_CENTER);
+            document.add(alamat);
+            
+            Paragraph garis1 = new Paragraph("============================", monospacedFont);
+            document.add(garis1);
+            
+            Paragraph trans = new Paragraph("Nomor Transaksi : " + noTran.getText(), monospacedFont);
+            trans.setAlignment(Element.ALIGN_LEFT);
+            document.add(trans);
+            
+            Paragraph kasir = new Paragraph("Kasir : " + User.getNama(), monospacedFont);
+            kasir.setAlignment(Element.ALIGN_LEFT);
+            document.add(kasir);
+            
+            LocalDateTime currentDate = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String formattedDateTime = currentDate.format(formatter);
+            
+            Paragraph tgl = new Paragraph("Tanggal : " + formattedDateTime, monospacedFont);
+            tgl.setAlignment(Element.ALIGN_LEFT);
+            document.add(tgl);
+            
+            Paragraph garis2 = new Paragraph("============================", monospacedFont);
+            document.add(garis2);
+            
+            DefaultTableModel tbl = (DefaultTableModel)MainTable.getModel();
+            for (int i = 0; i < MainTable.getRowCount(); i++) {
+                Paragraph item = new Paragraph(tbl.getValueAt(i, 0).toString() , monospacedFont);
+                item.setSpacingAfter(0);
+                document.add(item);
+                
+                Paragraph item1 = new Paragraph(tbl.getValueAt(i, 2).toString() + "     x     " + tbl.getValueAt(i, 1).toString() + "               " + tbl.getValueAt(i, 3).toString(), monospacedFont);
+                item1.setSpacingAfter(0);
+                item1.setAlignment(Element.ALIGN_RIGHT);
+                document.add(item1);
+                
+            }
+            
+            Paragraph garis3 = new Paragraph("============================", monospacedFont);
+            document.add(garis3);
+            
+            Paragraph total = new Paragraph("Total: Rp " + totalHar.getText(), monospacedFont);
+            total.setAlignment(Element.ALIGN_RIGHT);
+            total.setSpacingAfter(0);
+            document.add(total);
+            
+            Paragraph bayar = new Paragraph("Dibayar: Rp " + totalBay.getText(), monospacedFont);
+            bayar.setAlignment(Element.ALIGN_RIGHT);
+            bayar.setSpacingAfter(0);
+            document.add(bayar);
+            
+            Paragraph kembalian = new Paragraph("Dibayar: Rp " + totalKem.getText(), monospacedFont);
+            kembalian.setAlignment(Element.ALIGN_RIGHT);
+            kembalian.setSpacingAfter(0);
+            document.add(kembalian);
+
+            Paragraph garis4 = new Paragraph("============================", monospacedFont);
+            document.add(garis4);
+            
+            Paragraph footer = new Paragraph("TERIMA KASIH", monospacedFont);
+            footer.setAlignment(Element.ALIGN_CENTER);
+            document.add(footer);
+            
+            document.close();
+            fos.close();
+
+            // Membuka dokumen PDF menggunakan default viewer
+            Desktop.getDesktop().open(tempFile);
+        } catch (DocumentException | IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void jPanelLog5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLog5MouseClicked
 
        if(val()){
             LocalDateTime currentDate = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDateTime = currentDate.format(formatter);
-            String inTran = "insert into transaksi(id_user, total_item, total_harga, total_dibayar, total_kembalian, tanggal) values("+ User.id +", "+ Integer.parseInt(totalItem.getText()) +", "+ Integer.parseInt(totalHar.getText()) +", "+ Integer.parseInt(totalBay.getText()) +", "+ Integer.parseInt(totalKem.getText()) +", '"+ formattedDateTime +"')";
+            String inTran = "insert into transaksi(noTransaksi, id_user, total_item, total_harga, total_dibayar, total_kembalian, tanggal) values('"+ noTran.getText() +"',"+ User.id +", "+ Integer.parseInt(totalItem.getText()) +", "+ Integer.parseInt(totalHar.getText()) +", "+ Integer.parseInt(totalBay.getText()) +", "+ Integer.parseInt(totalKem.getText()) +", '"+ formattedDateTime +"')";
             try{
                 Statement stInTran = dbConnection.getConn().createStatement();
                 stInTran.executeUpdate(inTran);
@@ -599,12 +740,15 @@ public class MainKasir extends javax.swing.JFrame {
 //                    stUp.close();
                 }
                 JOptionPane.showMessageDialog(this, "Transaksi Berhasil");
+                    GenerateStruk();
                     tbl.setRowCount(0);
                     idBrgTbl.clear();
                     totalHar.setText("");
                     totalItem.setText("");
                     totalBay.setText("");
                     totalKem.setText("");
+                    noTran.setText(NomorTransaksi.generateUniqueTransactionNumber());
+                    
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.toString());
             }
@@ -707,6 +851,7 @@ public class MainKasir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelRiwTra2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -715,6 +860,7 @@ public class MainKasir extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelLog4;
     private javax.swing.JPanel jPanelLog5;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel noTran;
     private javax.swing.JPanel panel;
     private javax.swing.JTextField qty;
     private javax.swing.JTextField totalBay;

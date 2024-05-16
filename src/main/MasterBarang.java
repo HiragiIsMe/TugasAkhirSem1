@@ -5,8 +5,15 @@
 package main;
 
 import Utils.dbConnection;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.Barcode128;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.ResultSet;
@@ -15,6 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.pdf.PdfPTable;
 
 /**
  *
@@ -71,6 +79,8 @@ public class MasterBarang extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jPanelLog4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        printBarcode = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -351,6 +361,38 @@ public class MasterBarang extends javax.swing.JPanel {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
+        printBarcode.setBackground(new java.awt.Color(248, 111, 3));
+        printBarcode.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                printBarcodeMouseClicked(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 246, 244));
+        jLabel12.setText("Print");
+
+        javax.swing.GroupLayout printBarcodeLayout = new javax.swing.GroupLayout(printBarcode);
+        printBarcode.setLayout(printBarcodeLayout);
+        printBarcodeLayout.setHorizontalGroup(
+            printBarcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 108, Short.MAX_VALUE)
+            .addGroup(printBarcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(printBarcodeLayout.createSequentialGroup()
+                    .addGap(0, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel12)
+                    .addGap(0, 26, Short.MAX_VALUE)))
+        );
+        printBarcodeLayout.setVerticalGroup(
+            printBarcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 34, Short.MAX_VALUE)
+            .addGroup(printBarcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(printBarcodeLayout.createSequentialGroup()
+                    .addGap(0, 7, Short.MAX_VALUE)
+                    .addComponent(jLabel12)
+                    .addGap(0, 7, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -362,16 +404,17 @@ public class MasterBarang extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanelLog2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanelLog3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanelLog4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
-                                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jPanelLog4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(printBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+                            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -386,7 +429,8 @@ public class MasterBarang extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelLog2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanelLog4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanelLog4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(printBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(17, 17, 17)
                         .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanelLog3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -593,6 +637,45 @@ public class MasterBarang extends javax.swing.JPanel {
         hargajual.setText(tbl.getValueAt(MainTable.getSelectedRow(), 4).toString());
     }//GEN-LAST:event_MainTableMouseClicked
 
+    private void printBarcodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printBarcodeMouseClicked
+        try{
+            Document document = new Document(PageSize.A4);
+            File file = File.createTempFile("pdf", ".pdf");
+            FileOutputStream stream = new FileOutputStream(file);
+            
+            PdfWriter writer = PdfWriter.getInstance(document, stream);
+            PdfPTable table = new PdfPTable(3);
+            table.setWidthPercentage(100);
+            document.open();
+
+            
+            ResultSet rs = dbConnection.getData("select * from barang");
+            while(rs.next()){
+                String barcodeData = rs.getString("kode");
+
+                Barcode128 barcode = new Barcode128();
+                barcode.setCode(barcodeData);
+                com.itextpdf.text.Image image = barcode.createImageWithBarcode(writer.getDirectContent(), null, null);
+                
+                PdfPCell cell = new PdfPCell();
+                cell.setBorder(0);
+                cell.setPadding(20);
+                cell.addElement(image);
+
+                table.addCell(cell);
+            }
+            
+            document.add(table);
+            
+            rs.close();
+            document.close();
+            stream.close();
+            Desktop.getDesktop().open(file);
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_printBarcodeMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;
@@ -601,6 +684,7 @@ public class MasterBarang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -617,6 +701,7 @@ public class MasterBarang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField kode;
     private javax.swing.JTextField nama;
+    private javax.swing.JPanel printBarcode;
     private javax.swing.JComboBox<String> unit;
     // End of variables declaration//GEN-END:variables
 }

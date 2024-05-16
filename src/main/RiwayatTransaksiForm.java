@@ -28,7 +28,7 @@ public class RiwayatTransaksiForm extends javax.swing.JPanel {
         headRender.setBackground(new Color(248,111,3));
         MainSubTable.getTableHeader().setDefaultRenderer(headRender);
         MainTable.getTableHeader().setDefaultRenderer(headRender);
-        loadTableMain("select users.nama, transaksi.* from transaksi join users on transaksi.id_user = users.id");
+        loadTableMain("select transaksi.*, users.nama from transaksi join users on transaksi.id_user = users.id");
     }
 
     /**
@@ -177,7 +177,7 @@ public class RiwayatTransaksiForm extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -206,7 +206,7 @@ public class RiwayatTransaksiForm extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 632, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -216,6 +216,7 @@ public class RiwayatTransaksiForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     void loadTableMain(String query){
         DefaultTableModel tblMain = new DefaultTableModel();
+        tblMain.addColumn("Nomor Transaksi");
         tblMain.addColumn("Kasir");
         tblMain.addColumn("Total Item");
         tblMain.addColumn("Total Harga");
@@ -228,7 +229,7 @@ public class RiwayatTransaksiForm extends javax.swing.JPanel {
             id.clear();
             while(rs.next()){
                 id.add(rs.getInt("id"));
-                tblMain.addRow(new Object[]{rs.getString("nama"), String.valueOf(rs.getInt("total_item")), String.valueOf(rs.getInt("total_harga")), String.valueOf(rs.getInt("total_dibayar")), String.valueOf(rs.getInt("total_kembalian")), rs.getDate("tanggal")});
+                tblMain.addRow(new Object[]{rs.getString("noTransaksi"),rs.getString("nama"), String.valueOf(rs.getInt("total_item")), String.valueOf(rs.getInt("total_harga")), String.valueOf(rs.getInt("total_dibayar")), String.valueOf(rs.getInt("total_kembalian")), rs.getDate("tanggal")});
             }
             MainTable.setModel(tblMain);
         }catch(Exception e){
@@ -267,7 +268,7 @@ public class RiwayatTransaksiForm extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date tgl = filter.getDate();
         String ex = sdf.format(tgl);
-        loadTableMain("select users.nama, transaksi.* from transaksi join users on transaksi.id_user = users.id where tanggal='"+ ex +"'");
+        loadTableMain("select transaksi.*, users.nama from transaksi join users on transaksi.id_user = users.id where tanggal='"+ ex +"'");
     }//GEN-LAST:event_jPanelLogMouseClicked
 
 
